@@ -6,281 +6,131 @@ A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolv
 
 ## 1. Nome provisório do jogo
 
-Escreva aqui o nome provisório do jogo.
-
-Exemplo:
-
-> Corrida dos Obstáculos
+> SportQuiz
 
 ## 2. Integrantes do grupo
 
-Liste os integrantes do grupo.
-
-- Nome 1:
-- Nome 2:
-- Nome 3:
-- Nome 4:
+- Nome 1: Arthur Lopes Teixeira
+- Nome 2: Bernardo Duarte Medeiros de Paula
+- Nome 3: Bernardo Machado Ribeiro
+- Nome 4: João Vitor Soares
 
 ## 3. Tipo de jogo
 
-Indique o tipo de jogo que será desenvolvido.
-
-Exemplos:
-
-- jogo de desviar de obstáculos;
-- jogo de coleta de itens;
-- labirinto simples;
-- jogo de perguntas e respostas;
-- jogo de memória;
-- Pong;
-- Snake;
-- Breakout;
-- nave desviando de meteoros;
-- corrida simples com obstáculos;
-- jogo de clique rápido;
-- jogo de sobrevivência simples.
-
 Tipo escolhido pelo grupo:
 
-> Escreva aqui.
+> Jogo de perguntas e respostas.
 
 ## 4. Descrição geral do jogo
 
-Explique, em poucas linhas, como o jogo funcionará.
-
-Procure responder:
-
-- O que aparece na tela?
-- O que o jogador controla?
-- O que o jogador precisa fazer?
-- Quais desafios aparecem durante a partida?
-
 Descrição:
 
-> Escreva aqui.
+> Na tela principal aparecem perguntas de múltipla escolha sobre esportes (futebol, basquete, Fórmula 1, olimpíadas, entre outros). O jogador seleciona uma das quatro alternativas clicando com o mouse ou pressionando as teclas correspondentes. Cada pergunta tem um cronômetro individual: se o tempo acabar sem resposta, a pergunta é considerada errada. Ao final de todas as rodadas, a pontuação do jogador é registrada em um ranking local.
 
 ## 5. Objetivo do jogador
 
-Explique qual é o objetivo principal do jogador.
-
-Exemplos:
-
-- coletar o maior número possível de itens;
-- sobreviver pelo maior tempo possível;
-- chegar até o final do labirinto;
-- acertar alvos;
-- responder perguntas corretamente;
-- evitar obstáculos;
-- quebrar todos os blocos.
-
 Objetivo:
 
-> Escreva aqui.
+> Responder o maior número possível de perguntas corretamente dentro do tempo limite, acumulando pontuação para alcançar a posição mais alta no ranking.
 
 ## 6. Regras principais
 
-Liste as principais regras do jogo.
-
-Exemplo:
-
-- O jogador começa com 3 vidas.
-- Cada moeda coletada vale 10 pontos.
-- Cada colisão com obstáculo remove 1 vida.
-- A partida termina quando as vidas chegam a zero.
-- O jogador vence se alcançar 100 pontos.
-
 Regras do grupo:
 
-- Regra 1:
-- Regra 2:
-- Regra 3:
-- Regra 4:
-- Regra 5:
+- Regra 1: Cada pergunta tem um tempo limite de 15 segundos para ser respondida.
+- Regra 2: Resposta correta dentro do tempo vale 100 pontos; resposta errada ou tempo esgotado vale 0 pontos.
+- Regra 3: O jogo apresenta 10 perguntas por partida, selecionadas aleatoriamente do banco de questões.
+- Regra 4: Não é possível voltar a uma pergunta já respondida ou pulada.
+- Regra 5: Ao final da partida, a pontuação é registrada no ranking se estiver entre as 10 melhores.
 
 ## 7. Condição de vitória
 
-Explique como o jogador vence ou conclui o jogo.
-
-Exemplos:
-
-- atingir determinada pontuação;
-- chegar ao final da fase;
-- sobreviver até o tempo acabar;
-- responder uma quantidade mínima de perguntas;
-- quebrar todos os blocos.
-
 Condição de vitória:
 
-> Escreva aqui.
+> O jogador vence (conclui o jogo com sucesso) ao responder todas as 10 perguntas da partida. A vitória é mais expressiva quanto maior for a pontuação acumulada e quanto melhor for a colocação no ranking.
 
 ## 8. Condição de derrota ou encerramento
 
-Explique como o jogador perde ou quando a partida termina.
-
-Exemplos:
-
-- perder todas as vidas;
-- acabar o tempo;
-- colidir com determinado obstáculo;
-- errar muitas perguntas;
-- deixar a bola cair, no caso de Breakout ou Pong.
-
 Condição de derrota ou encerramento:
 
-> Escreva aqui.
+> A partida encerra automaticamente após as 10 perguntas serem respondidas ou o tempo de cada uma esgotar. Não há condição de derrota absoluta o jogador sempre completa a rodada, mas fica com pontuação zero se errar ou não responder todas as questões.
 
 ## 9. Elementos previstos no jogo
 
-Descreva os principais elementos que farão parte do jogo.
-
 ## Jogador ou elemento principal
-
-Exemplo:
-
-> Um personagem controlado pelas setas do teclado.
 
 Descrição:
 
-> Escreva aqui.
+> O jogador interage por meio do mouse (clique nas alternativas) ou pelas teclas 1, 2, 3 e 4 do teclado, correspondentes às quatro opções de resposta exibidas na tela.
 
 ## Obstáculos, inimigos ou desafios
 
-Exemplo:
-
-> Obstáculos aparecem em posições aleatórias e devem ser evitados.
-
 Descrição:
 
-> Escreva aqui.
+> O principal desafio é o cronômetro regressivo exibido em destaque na tela. À medida que o jogo avança, perguntas mais difíceis aparecem com maior frequência, aumentando a pressão sobre o jogador.
 
 ## Itens, alvos ou objetos de interação
 
-Exemplo:
-
-> Moedas aparecem na tela e aumentam a pontuação quando coletadas.
-
 Descrição:
 
-> Escreva aqui.
+> As quatro alternativas de resposta são os elementos de interação principais. Ao selecionar a resposta correta, um feedback visual verde é exibido; ao errar, um feedback vermelho indica a alternativa correta.
 
 ## Pontuação, vidas, tempo ou progresso
 
-Exemplo:
-
-> O jogador começa com 3 vidas e ganha 10 pontos por item coletado.
-
 Descrição:
 
-> Escreva aqui.
+> O jogador não possui vidas. A pontuação é acumulada ao longo das 10 perguntas (máximo de 1000 pontos por partida). Um indicador de progresso mostra a pergunta atual (ex.: "Pergunta 3 de 10"). O tempo restante de cada pergunta é exibido por uma barra que diminui visualmente.
 
 ## 10. Controles previstos
 
-Informe os comandos que serão utilizados pelo jogador.
-
-Exemplo:
-
-- Seta para cima: mover para cima
-- Seta para baixo: mover para baixo
-- Seta para esquerda: mover para esquerda
-- Seta para direita: mover para direita
-- Espaço: realizar ação
-- ESC: sair do jogo
-
 Controles do grupo:
 
-- Tecla/comando:
-- Tecla/comando:
-- Tecla/comando:
+- Tecla 1 / clique na opção A: selecionar primeira alternativa
+- Tecla 2 / clique na opção B: selecionar segunda alternativa
+- Tecla 3 / clique na opção C: selecionar terceira alternativa
+- Tecla 4 / clique na opção D: selecionar quarta alternativa
+- ESC: pausar o jogo / sair para o menu principal
+- ENTER: confirmar na tela de menu ou ranking
 
 ## 11. Organização inicial do código
 
-Explique como o grupo pretende organizar o código.
-
-Exemplo:
-
-- `main.py`: inicia o jogo;
-- `src/jogo.py`: contém o loop principal;
-- `src/config.py`: guarda configurações como tamanho da tela e cores;
-- `src/funcoes.py`: contém funções auxiliares;
-- `src/dados.py`: contém funções de leitura e escrita de arquivos.
-
 Organização planejada:
 
-> Escreva aqui.
-
+- `main.py`: inicializa o Pygame e chama o loop principal do jogo;
+- `src/jogo.py`: contém o loop principal e a lógica de transição entre as telas;
+- `src/config.py`: guarda constantes como tamanho da tela, cores, fontes e tempo limite por pergunta;
+- `src/perguntas.py`: carrega e gerencia o banco de perguntas a partir do arquivo JSON;
+- `src/ranking.py`: lê e grava o ranking em arquivo local (JSON ou TXT);
+- `src/telas.py`: funções de renderização para cada tela (menu, pergunta, feedback, ranking);
+- `data/perguntas.json`: banco de perguntas com enunciado, alternativas e resposta correta;
+- `data/ranking.json`: armazena as pontuações registradas.
 
 ## 12. Recursos externos previstos
 
-Informe se o grupo pretende utilizar imagens, sons, fontes, tutoriais ou códigos externos.
-
-Exemplo:
-
-- imagens obtidas de banco gratuito;
-- sons gratuitos;
-- tutorial usado apenas como referência;
-- fonte personalizada.
-
 Recursos previstos:
 
-> Escreva aqui.
-
-Caso não pretenda utilizar recursos externos, escreva:
-
-> Não pretendemos utilizar recursos externos.
+- Fonte personalizada obtida de banco gratuito (Google Fonts);
+- Sons de acerto e erro obtidos de banco de áudio gratuito (ex.: freesound.org);
+- Banco de perguntas elaborado pelo próprio grupo.
 
 ## 13. Principais dificuldades esperadas
 
-Liste as dificuldades que o grupo acredita que poderá enfrentar.
-
-Exemplos:
-
-- movimentação do jogador;
-- colisão entre objetos;
-- controle de tempo;
-- criação do ranking;
-- organização do código;
-- uso do GitHub;
-- testes;
-- exibição de textos na tela.
-
 Dificuldades previstas:
 
-- Dificuldade 1:
-- Dificuldade 2:
-- Dificuldade 3:
+- Dificuldade 1: Implementação do cronômetro por pergunta integrado ao loop do Pygame sem travar a interface.
+- Dificuldade 2: Leitura e gravação do ranking em arquivo de forma confiável (tratamento de erros de I/O).
+- Dificuldade 3: Organização do código em módulos separados mantendo a comunicação entre eles sem conflitos.
 
 ## 14. Escopo mínimo para a entrega final
 
-Descreva qual será a versão mínima aceitável do jogo.
-
-Esta seção é importante para evitar que o grupo escolha uma ideia grande demais.
-
-Exemplo:
-
-> A versão mínima do jogo terá um personagem controlado pelo teclado, obstáculos aparecendo na tela, sistema de vidas, sistema de pontuação e tela de fim de jogo.
-
 Escopo mínimo:
 
-> Escreva aqui.
+> A versão mínima do jogo terá tela de menu inicial, 10 perguntas de múltipla escolha sobre esportes com cronômetro por questão, feedback visual de acerto/erro, sistema de pontuação e tela de encerramento exibindo a pontuação final e o ranking das 10 melhores pontuações salvas localmente.
 
 ## 15. Possíveis melhorias, caso haja tempo
 
-Liste funcionalidades extras que o grupo poderá implementar se conseguir concluir o escopo mínimo.
-
-Exemplos:
-
-- tela inicial;
-- sons;
-- fases;
-- aumento de dificuldade;
-- ranking;
-- animações;
-- novos tipos de obstáculos;
-- diferentes personagens;
-- menu de pausa.
-
 Melhorias possíveis:
 
-- Melhoria 1:
-- Melhoria 2:
-- Melhoria 3:
+- Melhoria 1: Categorias de esportes selecionáveis no menu (futebol, basquete, olimpíadas etc.).
+- Melhoria 2: Níveis de dificuldade (fácil, médio, difícil) com tempo e pontuação ajustados.
+- Melhoria 3: Perguntas ilimitadas e adicionar vidas.
