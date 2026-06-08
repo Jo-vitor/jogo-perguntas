@@ -1,27 +1,54 @@
-def calcular_pontos(pontos_atual, pontos_ganhos):
-    """Soma os pontos ganhos à pontuação atual."""
-    return pontos_atual + pontos_ganhos
+import pygame
+from src.config import (
+    CORES   
+)
 
+cores_rentangulos = [
+    CORES["BRANCO"],
+    CORES["BRANCO"],
+    CORES["BRANCO"],
+    CORES["BRANCO"]
+]
 
-def tomar_dano(vida_atual, dano):
-    """Reduz a vida atual com base no dano recebido."""
-    return vida_atual - dano
+def criar_resposta():
+    respostas = []
 
+    top = 300
+    for i in range(4):
+        resposta = pygame.Rect(250, top, 300, 50)
+        respostas.append(resposta)
+        top += 70
 
-def jogador_perdeu(vidas):
-    """Indica se o jogador ficou sem vidas."""
-    return vidas <= 0
+    return respostas
 
+def desenhar_inico_jogo(tela, respostas):
+    pergunta = pygame.Rect(200, 50, 400, 200)
 
-def limitar_valor(valor, minimo, maximo):
-    """Mantém um valor dentro do intervalo [minimo, maximo]."""
-    if valor < minimo:
-        return minimo
-    if valor > maximo:
-        return maximo
-    return valor
+    tela.fill(CORES["CINZA"])
+        
+    pygame.draw.rect(tela, CORES["BRANCO"], pergunta, 0, 20)
 
+    for i in range(4):
+        pygame.draw.rect(tela, cores_rentangulos[i], respostas[i], 0, 10)
 
-def verificar_colisao(retangulo_1, retangulo_2):
-    """Verifica sobreposição entre dois retângulos do Pygame."""
-    return retangulo_1.colliderect(retangulo_2)
+def selecionar_resposta(evento):
+    if evento.type == pygame.KEYDOWN:
+        if evento.key == pygame.K_1:
+            cores_rentangulos[0] = CORES["VERDE"]
+        else:
+            cores_rentangulos[0] = CORES["BRANCO"]
+
+        if evento.key == pygame.K_2:
+            cores_rentangulos[1] = CORES["VERDE"]
+        else:
+            cores_rentangulos[1] = CORES["BRANCO"]
+
+        if evento.key == pygame.K_3:
+            cores_rentangulos[2] = CORES["VERDE"]
+        else:
+            cores_rentangulos[2] = CORES["BRANCO"]
+
+        if evento.key == pygame.K_4:
+            cores_rentangulos[3] = CORES["VERDE"]
+        else:
+            cores_rentangulos[3] = CORES["BRANCO"]
