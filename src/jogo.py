@@ -1,143 +1,142 @@
 import pygame
 
 from src.config import (
-    LARGURA_TELA,
     ALTURA_TELA,
-    FPS,
+    CAMINHO_PERGUNTAS,
+    LARGURA_TELA,
+    PERGUNTAS_POR_PARTIDA,
+    PONTOS_POR_ACERTO,
+    TEMPO_FEEDBACK_MS,
     TITULO_JOGO,
-    CINZA,
-    CAMINHO_RECORDE,
-    CAMINHO_SPRITES,
 )
-
 from src.funcoes import (
+    aplicar_feedback_cores,
     calcular_pontos,
-    jogador_perdeu,
-    limitar_valor,
-    verificar_colisao,
-    tomar_dano,
+    criar_cores_alternativas,
+    criar_fontes,
+    criar_rects_resposta,
+    desenhar_alternativas,
+    desenhar_feedback,
+    desenhar_pergunta,
+    desenhar_tela_final,
+    obter_indice_resposta,
+    resetar_cores_alternativas,
+    verificar_resposta,
 )
-from src.sprites import pegar_sprite
-from src.dados import (
-    salvar_recorde,
-    carregar_recorde,
-)
+from src.perguntas import carregar_perguntas, selecionar_perguntas
 
 
 def executar_jogo():
-    """Executa o loop principal do jogo e controla estado, colisões e pontuação."""
+    """Executa o loop principal do jogo e controla estado e pontuacao."""
     pygame.init()
-    
 
     tela = pygame.display.set_mode((LARGURA_TELA, ALTURA_TELA))
     pygame.display.set_caption(TITULO_JOGO)
-
     relogio = pygame.time.Clock()
+
+    fontes = criar_fontes()
+    rects_resposta = criar_rects_resposta()
+    cores_alternativas = criar_cores_alternativas()
+
+    perguntas = selecionar_perguntas(
+        carregar_perguntas(CAMINHO_PERGUNTAS),
+        PERGUNTAS_POR_PARTIDA,
+    )
+
+    indice_pergunta = 0
+    pontuacao = 0
+    estado = "aguardando"
+    indice_selecionado = None
+    acertou_ultima = False
+    horario_feedback = 0
+
     rodando = True
 
-    # 1. Carregando as imagens recortadas do Spritesheet
-
-
-    # Jogador: usando tamanho 110x110 para capturar o quadrado perfeitamente
-    player_image = pegar_sprite(CAMINHO_SPRITES, x=110, y=120, width=190, height=190, scale=0.5)
-
-    # Gema pequena: usando tamanho 64x64
-    gem_image    = pegar_sprite(CAMINHO_SPRITES, x=900, y=690, width=200, height=200, scale=0.5)
-
-    # Morcego: usando tamanho 180x120 por causa das asas abertas
-    bat_image    = pegar_sprite(CAMINHO_SPRITES, x=905, y=1060, width=200, height=130, scale=0.5)
-    
-    # 2. Criando a estrutura de Sprites usando Dicionários
-    jogador = {
-        "imagem": player_image,
-        "rect": player_image.get_rect(topleft=(100, 100))
-    }
-
-    gema = {
-        "imagem": gem_image,
-        "rect": gem_image.get_rect(topleft=(500, 300))
-    }
-    
-    inimigo = {
-        "imagem": bat_image,
-        "rect": bat_image.get_rect(topleft=(200, 500))
-    }
-
-    velocidade = 5
-    pontos = 0
-    vidas = 3
-    recorde = carregar_recorde(CAMINHO_RECORDE)
-
-    # Loop principal: processa entrada, atualiza estado e renderiza a cena.
     while rodando:
-        relogio.tick(FPS)
-
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 rodando = False
+                continue
 
-        teclas = pygame.key.get_pressed()
+            if evento.type == pygame.KEYDOWN and evento.key == pygame.K_ESCAPE:
+                if estado == "fim":
+                    rodando = False
+                continue
 
-        # Movimentação alterando direto os eixos X e Y do retângulo do jogador
-        if teclas[pygame.K_LEFT]:
-            jogador["rect"].x -= velocidade
-        if teclas[pygame.K_RIGHT]:
-            jogador["rect"].x += velocidade
-        if teclas[pygame.K_UP]:
-            jogador["rect"].y -= velocidade
-        if teclas[pygame.K_DOWN]:
-            jogador["rect"].y += velocidade
+            if estado != "aguardando":
+                continue
 
-        # Limitando o jogador dentro das bordas da tela usando as propriedades do Rect
-        jogador["rect"].x = limitar_valor(jogador["rect"].x, 0, LARGURA_TELA - jogador["rect"].width)
-        jogador["rect"].y = limitar_valor(jogador["rect"].y, 0, ALTURA_TELA - jogador["rect"].height)
+            indice_resposta = obter_indice_resposta(evento, rects_resposta)
+            if indice_resposta is None:
+                continue
 
-        # Verificação de colisão com a Gema (antigo 'item')
-        if verificar_colisao(jogador["rect"], gema["rect"]):
-            pontos = calcular_pontos(pontos, 10)
+            pergunta_atual = perguntas[indice_pergunta]
+            indice_selecionado = indice_resposta
+            acertou_ultima = verificar_resposta(
+                indice_selecionado,
+                pergunta_atual["correta"],
+            )
 
-            # Move a gema de lugar ao coletar
-            gema["rect"].x += 80
-            gema["rect"].y += 50
+            if acertou_ultima:
+                pontuacao = calcular_pontos(pontuacao, PONTOS_POR_ACERTO)
 
-            # Se a gema sair da tela, volta para uma posição segura
-            if gema["rect"].x > LARGURA_TELA - gema["rect"].width:
-                gema["rect"].x = 50
-            if gema["rect"].y > ALTURA_TELA - gema["rect"].height:
-                gema["rect"].y = 50
+            aplicar_feedback_cores(
+                cores_alternativas,
+                indice_selecionado,
+                pergunta_atual["correta"],
+                acertou_ultima,
+            )
 
-        # Verificação de colisão com o Inimigo
-        if verificar_colisao(jogador["rect"], inimigo["rect"]):
-            vidas = tomar_dano(vidas, 1)
+            estado = "feedback"
+            horario_feedback = pygame.time.get_ticks()
 
-            # Afasta o inimigo ao colidir
-            inimigo["rect"].x += 80
-            inimigo["rect"].y += 50
+        if estado == "feedback":
+            tempo_decorrido = pygame.time.get_ticks() - horario_feedback
 
-            if inimigo["rect"].x > LARGURA_TELA - inimigo["rect"].width:
-                inimigo["rect"].x = 50
-            if inimigo["rect"].y > ALTURA_TELA - inimigo["rect"].height:
-                inimigo["rect"].y = 50
+            if tempo_decorrido >= TEMPO_FEEDBACK_MS:
+                indice_pergunta += 1
 
-        # Regras de fim de jogo e recorde
-        if jogador_perdeu(vidas):
-            rodando = False
+                if indice_pergunta >= len(perguntas):
+                    estado = "fim"
+                else:
+                    estado = "aguardando"
+                    indice_selecionado = None
+                    resetar_cores_alternativas(cores_alternativas)
 
-        if pontos > recorde:
-            recorde = pontos
-            salvar_recorde(CAMINHO_RECORDE, recorde)
+        if estado == "fim":
+            desenhar_tela_final(tela, fontes, pontuacao)
+        else:
+            pergunta_atual = perguntas[indice_pergunta]
+            desenhar_pergunta(
+                tela,
+                fontes,
+                pergunta_atual,
+                indice_pergunta,
+                len(perguntas),
+                pontuacao,
+            )
+            posicao_mouse = pygame.mouse.get_pos()
+            indice_hover = None
 
-        pygame.display.set_caption(
-            f"{TITULO_JOGO} | Pontos: {pontos} | Recorde: {recorde} | Vidas: {vidas}"
-        )
+            if estado == "aguardando":
+                for indice, rect in enumerate(rects_resposta):
+                    if rect.collidepoint(posicao_mouse):
+                        indice_hover = indice
+                        break
 
-        tela.fill(CINZA)
+            desenhar_alternativas(
+                tela,
+                fontes,
+                pergunta_atual["alternativas"],
+                rects_resposta,
+                cores_alternativas,
+                indice_hover=indice_hover,
+            )
 
-        # Desenhando os elementos na tela passando a imagem e o rect de cada dicionário
-        tela.blit(gema["imagem"], gema["rect"])
-        tela.blit(inimigo["imagem"], inimigo["rect"])
-        tela.blit(jogador["imagem"], jogador["rect"])
+            if estado == "feedback":
+                desenhar_feedback(tela, fontes["feedback"], acertou_ultima)
 
         pygame.display.flip()
+        relogio.tick(60)
 
     pygame.quit()

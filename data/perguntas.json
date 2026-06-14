@@ -1,0 +1,62 @@
+[
+  {
+    "pergunta": "Quantos jogadores um time de futebol tem em campo?",
+    "alternativas": ["9", "10", "11", "12"],
+    "correta": 2
+  },
+  {
+    "pergunta": "Em qual esporte se usa a raquete e uma bola amarela?",
+    "alternativas": ["Basquete", "Tenis", "Volei", "Handebol"],
+    "correta": 1
+  },
+  {
+    "pergunta": "Quantos sets sao necessarios para vencer uma partida oficial de volei?",
+    "alternativas": ["2", "3", "4", "5"],
+    "correta": 1
+  },
+  {
+    "pergunta": "Qual pais sediou a Copa do Mundo de 2014?",
+    "alternativas": ["Alemanha", "Brasil", "Africa do Sul", "Russia"],
+    "correta": 1
+  },
+  {
+    "pergunta": "Quantos jogadores um time de basquete tem em quadra?",
+    "alternativas": ["4", "5", "6", "7"],
+    "correta": 1
+  },
+  {
+    "pergunta": "Em qual esporte existe o Grand Slam?",
+    "alternativas": ["Golfe", "Tenis", "Natacao", "Atletismo"],
+    "correta": 1
+  },
+  {
+    "pergunta": "Qual esporte e praticado na NBA?",
+    "alternativas": ["Futebol americano", "Basquete", "Beisebol", "Hockey"],
+    "correta": 1
+  },
+  {
+    "pergunta": "Quantos jogadores comecam uma partida de handebol em cada time?",
+    "alternativas": ["5", "6", "7", "8"],
+    "correta": 2
+  },
+  {
+    "pergunta": "Qual modalidade faz parte das provas de atletismo nas Olimpiadas?",
+    "alternativas": ["Salto em distancia", "Surf", "Skate", "Escalada"],
+    "correta": 0
+  },
+  {
+    "pergunta": "Em qual esporte se usa o capacete e se corre em pista oval?",
+    "alternativas": ["Formula 1", "Ciclismo de pista", "Rugby", "Polo aquatico"],
+    "correta": 1
+  },
+  {
+    "pergunta": "Quantos pontos vale uma cesta de tres no basquete?",
+    "alternativas": ["1", "2", "3", "4"],
+    "correta": 2
+  },
+  {
+    "pergunta": "Qual esporte e disputado no torneio de Wimbledon?",
+    "alternativas": ["Tenis", "Cricket", "Rugby", "Badminton"],
+    "correta": 0
+  }
+]

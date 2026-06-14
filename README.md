@@ -1,4 +1,4 @@
-# Nome do Jogo
+# SportQuiz
 
 Projeto final da disciplina de Introdução a Algoritmos/Programação, desenvolvido com Python e Pygame.
 
@@ -6,10 +6,10 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Integrantes do grupo
 
-- Nome do integrante 1
-- Nome do integrante 2
-- Nome do integrante 3
-- Nome do integrante 4
+- Arthur Lopes Teixeira
+- Bernardo Duarte Medeiros de Paula
+- Bernardo Machado Ribeiro
+- João Vitor Soares
 
 ## Estrutura do projeto
 
@@ -22,43 +22,28 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Descrição do jogo
 
-Descreva brevemente a ideia principal do jogo.
-
-Exemplo:
-
-> O jogo consiste em controlar um personagem que deve coletar moedas e evitar obstáculos. O jogador ganha pontos ao coletar itens e perde vidas ao colidir com obstáculos. A partida termina quando o tempo acaba ou quando o jogador perde todas as vidas.
+> Na tela principal aparecem perguntas de múltipla escolha sobre esportes (futebol, basquete, Fórmula 1, olimpíadas, entre outros). O jogador seleciona uma das quatro alternativas clicando com o mouse ou pressionando as teclas correspondentes. Cada pergunta tem um cronômetro individual: se o tempo acabar sem resposta, a pergunta é considerada errada. Ao final de todas as rodadas, a pontuação do jogador é registrada em um ranking local.
 
 ## Objetivo do jogador
 
-Explique o que o jogador precisa fazer para vencer ou avançar no jogo.
-
-Exemplo:
-
-> O objetivo é coletar a maior quantidade possível de itens antes que o tempo acabe, evitando colisões com os obstáculos.
+> Responder o maior número possível de perguntas corretamente dentro do tempo limite, acumulando pontuação para alcançar a posição mais alta no ranking.
 
 ## Regras do jogo
 
-Liste as principais regras do jogo.
-
-Exemplo:
-
-- O jogador se movimenta usando as setas do teclado.
-- Cada item coletado aumenta a pontuação.
-- Colidir com um obstáculo reduz a quantidade de vidas.
-- A partida termina quando o jogador perde todas as vidas ou quando o tempo acaba.
+- Cada pergunta tem um tempo limite de 15 segundos para ser respondida.
+- Resposta correta dentro do tempo vale 100 pontos; resposta errada ou tempo esgotado vale 0 pontos.
+- O jogo apresenta 10 perguntas por partida, selecionadas aleatoriamente do banco de questões.
+- Não é possível voltar a uma pergunta já respondida ou pulada.
+- Ao final da partida, a pontuação é registrada no ranking se estiver entre as 10 melhores.
 
 ## Controles
 
-Informe as teclas ou comandos utilizados no jogo.
-
-Exemplo:
-
-- Seta para cima: mover para cima
-- Seta para baixo: mover para baixo
-- Seta para esquerda: mover para esquerda
-- Seta para direita: mover para direita
-- Espaço: realizar ação
-- ESC: sair do jogo
+- Tecla 1 / clique na opção A: selecionar primeira alternativa
+- Tecla 2 / clique na opção B: selecionar segunda alternativa
+- Tecla 3 / clique na opção C: selecionar terceira alternativa
+- Tecla 4 / clique na opção D: selecionar quarta alternativa
+- Clique com o botão esquerdo do mouse: selecionar uma alternativa
+- ESC: pausar o jogo / sair para o menu principal
 
 ## Como executar o projeto
 
