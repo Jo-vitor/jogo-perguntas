@@ -27,6 +27,7 @@ from src.config import (
     Y_CARD_PERGUNTA,
     Y_HEADER,
     Y_PRIMEIRA_ALTERNATIVA,
+    TEMPO_LIMITE
 )
 
 LETRAS_ALTERNATIVAS = ("A", "B", "C", "D")
@@ -215,7 +216,7 @@ def _desenhar_badge(tela, fontes, letra, rect_botao, cor_fundo=CORES["DESTAQUE"]
     )
 
 
-def _desenhar_header(tela, fontes, indice, total, pontuacao):
+def _desenhar_header(tela, fontes, indice, total, pontuacao, tempo):
     """Desenha o cabecalho com titulo, progresso e pontuacao."""
     _desenhar_texto_em_rect(
         tela,
@@ -232,6 +233,17 @@ def _desenhar_header(tela, fontes, indice, total, pontuacao):
         f"Pergunta {indice + 1} de {total}",
         Y_HEADER + 20,
         CORES["TEXTO_CLARO"],
+    )
+
+    badge_cronometro = pygame.Rect(LARGURA_TELA - MARGEM - 230, Y_HEADER + 4, 110, 32)
+    _desenhar_card(tela, badge_cronometro, CORES["DESTAQUE"], CORES["DESTAQUE"])
+    _desenhar_texto_centralizado(
+        tela,
+        fontes["info"],
+        f"{tempo:.2f}s",
+        badge_cronometro.centery,
+        CORES["TEXTO_CLARO"],
+        badge_cronometro.centerx,
     )
 
     badge_pontos = pygame.Rect(LARGURA_TELA - MARGEM - 110, Y_HEADER + 4, 110, 32)
@@ -257,10 +269,10 @@ def _desenhar_rodape(tela, fontes):
     )
 
 
-def desenhar_pergunta(tela, fontes, pergunta_atual, indice, total, pontuacao):
+def desenhar_pergunta(tela, fontes, pergunta_atual, indice, total, pontuacao, tempo):
     """Desenha o enunciado, progresso e pontuacao atual."""
     _desenhar_fundo(tela)
-    _desenhar_header(tela, fontes, indice, total, pontuacao)
+    _desenhar_header(tela, fontes, indice, total, pontuacao, tempo)
     _desenhar_barra_progresso(tela, indice, total)
 
     pergunta_rect = pygame.Rect(MARGEM, Y_CARD_PERGUNTA, LARGURA_CONTEUDO, ALTURA_CARD_PERGUNTA)
@@ -317,7 +329,7 @@ def desenhar_alternativas(tela, fontes, alternativas, rects, cores, indice_hover
         _desenhar_texto_em_rect(tela, fontes["alternativa"], texto, texto_rect, margem=0)
 
 
-def desenhar_feedback(tela, fonte, acertou):
+def desenhar_feedback(tela, fonte, acertou, tempo=False):
     """Mostra overlay e mensagem de feedback apos a resposta."""
     overlay = pygame.Surface((LARGURA_TELA, ALTURA_TELA), pygame.SRCALPHA)
     overlay.fill(CORES["OVERLAY"])
@@ -333,6 +345,15 @@ def desenhar_feedback(tela, fonte, acertou):
             f"+{PONTOS_POR_ACERTO} pontos",
             card_rect.centery,
             CORES["VERDE_SUAVE"],
+        )
+    elif tempo:
+        _desenhar_card(tela, card_rect, CORES["VERMELHO_FUNDO"], CORES["VERMELHO_SUAVE"], 3)
+        _desenhar_texto_centralizado(
+            tela,
+            fonte,
+            "O tempo acabou",
+            card_rect.centery,
+            CORES["VERMELHO_SUAVE"],
         )
     else:
         _desenhar_card(tela, card_rect, CORES["VERMELHO_FUNDO"], CORES["VERMELHO_SUAVE"], 3)
@@ -373,3 +394,8 @@ def desenhar_tela_final(tela, fontes, pontuacao):
         card_rect.y + 230,
         CORES["TEXTO_SECUNDARIO"],
     )
+
+def calcular_tempo(agora, inicio):
+    tempo_passado = (agora - inicio) / 1000 
+    tempo_restante = TEMPO_LIMITE - tempo_passado
+    return tempo_restante if tempo_restante>0 else 0

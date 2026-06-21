@@ -8,6 +8,7 @@ from src.config import (
     PONTOS_POR_ACERTO,
     TEMPO_FEEDBACK_MS,
     TITULO_JOGO,
+    TEMPO_LIMITE
 )
 from src.funcoes import (
     aplicar_feedback_cores,
@@ -22,6 +23,7 @@ from src.funcoes import (
     obter_indice_resposta,
     resetar_cores_alternativas,
     verificar_resposta,
+    calcular_tempo
 )
 from src.perguntas import carregar_perguntas, selecionar_perguntas
 
@@ -49,6 +51,7 @@ def executar_jogo():
     indice_selecionado = None
     acertou_ultima = False
     horario_feedback = 0
+    inicio = pygame.time.get_ticks()
 
     rodando = True
 
@@ -90,6 +93,18 @@ def executar_jogo():
             estado = "feedback"
             horario_feedback = pygame.time.get_ticks()
 
+        if estado == "aguardando":
+            agora = pygame.time.get_ticks()
+            tempo_passado = (agora - inicio) / 1000 
+            tempo_restante = TEMPO_LIMITE - tempo_passado
+                
+            if tempo_restante <= 0:
+                acertou_ultima = False
+                pergunta_atual = perguntas[indice_pergunta]
+                estado = "feedback"
+                horario_feedback = pygame.time.get_ticks()
+                tempo_restante = 0
+
         if estado == "feedback":
             tempo_decorrido = pygame.time.get_ticks() - horario_feedback
 
@@ -102,6 +117,8 @@ def executar_jogo():
                     estado = "aguardando"
                     indice_selecionado = None
                     resetar_cores_alternativas(cores_alternativas)
+                    inicio = pygame.time.get_ticks()
+                    
 
         if estado == "fim":
             desenhar_tela_final(tela, fontes, pontuacao)
@@ -114,6 +131,7 @@ def executar_jogo():
                 indice_pergunta,
                 len(perguntas),
                 pontuacao,
+                tempo_restante
             )
             posicao_mouse = pygame.mouse.get_pos()
             indice_hover = None
@@ -134,7 +152,7 @@ def executar_jogo():
             )
 
             if estado == "feedback":
-                desenhar_feedback(tela, fontes["feedback"], acertou_ultima)
+                desenhar_feedback(tela, fontes["feedback"], acertou_ultima, tempo_restante <= 0)
 
         pygame.display.flip()
         relogio.tick(60)
