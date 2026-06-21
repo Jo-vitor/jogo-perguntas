@@ -1,76 +1,185 @@
-# SportQuiz
+﻿# SportQuiz
 
-Projeto final da disciplina de Introdução a Algoritmos/Programação, desenvolvido com Python e Pygame.
+SportQuiz é um jogo de perguntas e respostas sobre esportes desenvolvido em Python com a biblioteca Pygame. O projeto foi criado como entrega final da disciplina de Introdução aos Algoritmos, utilizando o template oficial disponibilizado pelo professor.
 
-Este repositório é um template para os grupos da disciplina. A proposta é começar com uma base funcional e evoluir o jogo ao longo do semestre.
+O objetivo do jogo é testar os conhecimentos do jogador sobre esportes por meio de perguntas de múltipla escolha. A cada rodada, o jogador deve escolher a alternativa correta antes que o tempo acabe. Respostas corretas aumentam a pontuação, e ao final da partida o resultado é salvo em um ranking local.
 
-## Integrantes do grupo
+## Integrantes
 
-- Arthur Lopes Teixeira
-- Bernardo Duarte Medeiros de Paula
-- Bernardo Machado Ribeiro
-- João Vitor Soares
+* Arthur Lopes Teixeira
+* Bernardo Duarte Medeiros de Paula
+* Bernardo Machado Ribeiro
+* João Vitor Soares
 
-## Estrutura do projeto
+## Proposta do jogo
 
-- `main.py`: ponto de entrada da aplicação.
-- `src/`: código-fonte principal do jogo (loop, regras, sprites e dados).
-- `assets/`: imagens, fontes e sons.
-- `data/`: arquivos persistentes (recorde/ranking).
-- `tests/`: testes unitários com `pytest`.
-- `docs/`: documentação do projeto, incluindo proposta inicial.
+O SportQuiz é um jogo simples, funcional e jogável, com foco na aplicação dos principais conceitos estudados na disciplina. O jogador interage com perguntas de múltipla escolha, acumula pontos ao acertar respostas e tenta superar seu próprio recorde.
 
-## Descrição do jogo
+A partida termina quando todas as perguntas da rodada são respondidas. Ao final, o jogo exibe a pontuação final, atualiza o recorde local e registra o desempenho no ranking.
 
-> Na tela principal aparecem perguntas de múltipla escolha sobre esportes (futebol, basquete, Fórmula 1, olimpíadas, entre outros). O jogador seleciona uma das quatro alternativas clicando com o mouse ou pressionando as teclas correspondentes. Cada pergunta tem um cronômetro individual: se o tempo acabar sem resposta, a pergunta é considerada errada. Ao final de todas as rodadas, a pontuação do jogador é registrada em um ranking local.
+## Como jogar
 
-## Objetivo do jogador
+Na tela inicial, o jogador pode iniciar uma partida, visualizar o ranking ou sair do jogo.
 
-> Responder o maior número possível de perguntas corretamente dentro do tempo limite, acumulando pontuação para alcançar a posição mais alta no ranking.
+Durante a partida:
 
-## Regras do jogo
-
-- Cada pergunta tem um tempo limite de 15 segundos para ser respondida.
-- Resposta correta dentro do tempo vale 100 pontos; resposta errada ou tempo esgotado vale 0 pontos.
-- O jogo apresenta 10 perguntas por partida, selecionadas aleatoriamente do banco de questões.
-- Não é possível voltar a uma pergunta já respondida ou pulada.
-- Ao final da partida, a pontuação é registrada no ranking se estiver entre as 10 melhores.
+* Cada pergunta possui quatro alternativas;
+* O jogador deve escolher uma alternativa usando o teclado ou o mouse;
+* Respostas corretas somam pontos;
+* Cada pergunta possui tempo limite;
+* Ao final da rodada, a pontuação é exibida na tela final;
+* O ranking local armazena as melhores pontuações.
 
 ## Controles
 
-- Tecla 1 / clique na opção A: selecionar primeira alternativa
-- Tecla 2 / clique na opção B: selecionar segunda alternativa
-- Tecla 3 / clique na opção C: selecionar terceira alternativa
-- Tecla 4 / clique na opção D: selecionar quarta alternativa
-- Clique com o botão esquerdo do mouse: selecionar uma alternativa
-- ESC: pausar o jogo / sair para o menu principal
+### Menu
 
-## Como executar o projeto
+* `W` ou seta para cima: mover seleção para cima;
+* `S` ou seta para baixo: mover seleção para baixo;
+* `ENTER`: selecionar opção;
+* `ESC`: voltar ou sair.
 
-### 1. Clonar o repositório
+### Durante o jogo
+
+* `1`, `2`, `3`, `4`: selecionar alternativa;
+* Clique do mouse: selecionar alternativa;
+* `ESC`: sair ou voltar, dependendo da tela.
+
+## Mecânicas implementadas
+
+* Janela do Pygame funcionando;
+* Menu inicial com opções de navegação;
+* Tela principal de perguntas;
+* Controle por teclado e mouse;
+* Perguntas de múltipla escolha;
+* Sistema de pontuação;
+* Tempo limite por pergunta;
+* Feedback visual de resposta correta ou incorreta;
+* Recorde salvo em arquivo local;
+* Ranking salvo em arquivo local;
+* Tela final de resultado;
+* Código organizado em módulos e funções;
+* Leitura de perguntas a partir de arquivo JSON;
+* Escrita e leitura de recorde e ranking em arquivos locais;
+* Testes simples para funções de lógica do jogo.
+
+## Conceitos da disciplina utilizados
+
+O projeto aplica os seguintes conceitos estudados ao longo da disciplina:
+
+* Variáveis;
+* Entrada e saída de dados;
+* Estruturas condicionais;
+* Laços de repetição;
+* Listas;
+* Dicionários;
+* Tuplas;
+* Funções;
+* Modularização;
+* Manipulação de arquivos;
+* Leitura de dados em JSON;
+* Escrita de dados em arquivos locais;
+* Testes automatizados;
+* Organização de código em pastas e módulos.
+
+## Estrutura do projeto
+
+```txt
+jogo-perguntas/
+├── assets/
+├── data/
+│   ├── perguntas.json
+│   ├── ranking.json
+│   └── recorde.txt
+├── docs/
+│   └── proposta.md
+├── src/
+│   ├── config.py
+│   ├── engine.py
+│   ├── funcoes.py
+│   ├── perguntas.py
+│   ├── screens/
+│   │   └── ui.py
+│   └── services/
+│       └── data_service.py
+├── tests/
+│   └── test_logica.py
+├── main.py
+├── README.md
+└── requirements.txt
+```
+
+## Descrição dos principais arquivos
+
+* `main.py`: ponto de entrada do projeto. Inicia a execução do jogo;
+* `src/engine.py`: controla o loop principal, os estados do jogo e a lógica geral da partida;
+* `src/config.py`: armazena configurações gerais, como tamanho da tela, cores, caminhos de arquivos e constantes do jogo;
+* `src/funcoes.py`: contém funções auxiliares de lógica;
+* `src/perguntas.py`: contém funções relacionadas às perguntas do jogo;
+* `src/screens/ui.py`: contém funções responsáveis por desenhar as telas, botões, textos e elementos visuais;
+* `src/services/data_service.py`: realiza leitura e escrita de dados, como perguntas, recorde e ranking;
+* `data/perguntas.json`: arquivo com o banco de perguntas;
+* `data/recorde.txt`: arquivo que armazena o maior recorde local;
+* `data/ranking.json`: arquivo que armazena as melhores pontuações;
+* `docs/proposta.md`: proposta inicial do jogo;
+* `tests/test_logica.py`: testes simples para validar funções de lógica do projeto;
+* `requirements.txt`: lista de dependências necessárias para executar o projeto.
+
+## Como executar o jogo
+
+Primeiro, instale as dependências:
 
 ```bash
-git clone LINK_DO_REPOSITORIO
-cd NOME_DA_PASTA
 pip install -r requirements.txt
+```
+
+Depois, execute o jogo:
+
+```bash
 python main.py
 ```
 
 ## Como executar os testes
 
+Para executar os testes automatizados, use o comando:
+
 ```bash
 python -m pytest
 ```
 
-## Checklist mínimo para entrega
+## Arquivos auxiliares
 
-- Preencher este README com nome final, descrição real, regras e controles do jogo.
-- Atualizar `docs/proposta.MD` com a proposta do grupo.
-- Garantir que o jogo executa com `python main.py`.
-- Garantir que os testes passam com `pytest`.
+O jogo utiliza arquivos auxiliares para armazenar e carregar informações importantes:
 
-## Observações para os alunos
+* `data/perguntas.json`: contém as perguntas e alternativas usadas durante a partida;
+* `data/recorde.txt`: armazena o maior recorde atingido;
+* `data/ranking.json`: armazena as melhores pontuações do jogador.
 
-- Mantenham o código organizado em módulos pequenos e com responsabilidade clara.
-- Comentem partes importantes da lógica, principalmente regras do jogo.
-- Registrem decisões técnicas no README do grupo ao longo do desenvolvimento.
+Esses arquivos são necessários para o funcionamento correto do jogo e devem ser mantidos no repositório.
+
+## Regras do jogo
+
+* O jogador inicia uma partida pelo menu principal;
+* Cada pergunta apresenta quatro alternativas;
+* Apenas uma alternativa está correta;
+* O jogador pode responder usando teclado ou mouse;
+* Cada resposta correta soma pontos;
+* Cada pergunta possui tempo limite;
+* A partida termina quando todas as perguntas da rodada são respondidas;
+* Ao final, o jogo exibe a pontuação final, atualiza o recorde e salva o resultado no ranking.
+
+## Condição de encerramento
+
+A partida é encerrada quando o jogador responde todas as perguntas selecionadas para a rodada. Após isso, o jogo apresenta a tela final com a pontuação obtida e o recorde atual.
+
+## Recursos externos
+
+O projeto utiliza a biblioteca Pygame para criação da interface gráfica e execução do jogo.
+
+O projeto foi desenvolvido a partir do template oficial da disciplina, mantendo a organização inicial de pastas e arquivos proposta pelo professor.
+
+As perguntas foram elaboradas pelo grupo. Os arquivos presentes na pasta `assets/` fazem parte da estrutura do projeto/template ou foram mantidos como recursos auxiliares. Caso novos recursos externos sejam adicionados, como imagens, sons ou fontes, sua origem e licença devem ser registradas nesta seção.
+
+## Observações finais
+
+O SportQuiz foi desenvolvido com foco em simplicidade, organização e funcionamento correto. A proposta prioriza um jogo pequeno, jogável e bem estruturado, de acordo com os requisitos da entrega final do trabalho prático.

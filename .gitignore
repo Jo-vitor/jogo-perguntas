@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.sixth/
+install_log.txt
+.DS_Store

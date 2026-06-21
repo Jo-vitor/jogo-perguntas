@@ -1,24 +1,21 @@
 import json
-import random
+from random import sample
 
 
-def carregar_perguntas(caminho):
-    """Carrega o banco de perguntas a partir de um arquivo JSON."""
-    with open(caminho, "r", encoding="utf-8") as arquivo:
-        perguntas = json.load(arquivo)
-
-    for pergunta in perguntas:
-        if len(pergunta["alternativas"]) != 4:
-            raise ValueError("Cada pergunta deve ter exatamente 4 alternativas.")
-
-        if not 0 <= pergunta["correta"] <= 3:
-            raise ValueError("O indice da resposta correta deve estar entre 0 e 3.")
-
-    return perguntas
+def carregar_perguntas(caminho_arquivo):
+    """Carrega perguntas de um arquivo JSON e retorna uma lista de dicionários."""
+    try:
+        with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
+            perguntas = json.load(arquivo)
+            return perguntas if isinstance(perguntas, list) else []
+    except FileNotFoundError:
+        return []
 
 
-def selecionar_perguntas(lista, quantidade=10):
-    """Embaralha e retorna ate a quantidade solicitada de perguntas."""
-    copia = lista.copy()
-    random.shuffle(copia)
-    return copia[:quantidade]
+def selecionar_perguntas(perguntas, quantidade):
+    """Seleciona um subconjunto de perguntas de forma aleatória."""
+    if not perguntas:
+        return []
+    if len(perguntas) <= quantidade:
+        return perguntas.copy()
+    return sample(perguntas, quantidade)
